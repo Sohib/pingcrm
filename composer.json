@@ -11,6 +11,7 @@
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
+        "nette/php-generator": "^4.0",
         "spatie/laravel-data": "^3.0",
         "tightenco/ziggy": "^1.0"
     },
