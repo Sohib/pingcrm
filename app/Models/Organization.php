@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use App\Data\OrganizationData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\LaravelData\WithData;
 
 class Organization extends Model
 {
-    use WithData;
     use HasFactory;
     use SoftDeletes;
 
@@ -35,11 +32,5 @@ class Organization extends Model
                 $query->onlyTrashed();
             }
         });
-    }
-
-
-    protected function dataClass(): string
-    {
-        return OrganizationData::class;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\OrganizationData;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -20,7 +19,7 @@ class OrganizationsController extends Controller
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(10)
                 ->withQueryString()
-                ->through(fn($organization) => [
+                ->through(fn ($organization) => [
                     'id' => $organization->id,
                     'name' => $organization->name,
                     'phone' => $organization->phone,
@@ -56,7 +55,19 @@ class OrganizationsController extends Controller
     public function edit(Organization $organization)
     {
         return Inertia::render('Organizations/Edit', [
-            'organization' => $organization->getData(),
+            'organization' => [
+                'id' => $organization->id,
+                'name' => $organization->name,
+                'email' => $organization->email,
+                'phone' => $organization->phone,
+                'address' => $organization->address,
+                'city' => $organization->city,
+                'region' => $organization->region,
+                'country' => $organization->country,
+                'postal_code' => $organization->postal_code,
+                'deleted_at' => $organization->deleted_at,
+                'contacts' => $organization->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+            ],
         ]);
     }
 
